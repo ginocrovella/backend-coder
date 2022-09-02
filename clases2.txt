@@ -1,0 +1,24 @@
+Principios JavaScript
+    'var' no usamos más.
+    'let' y 'const' son los que vamos a utilizar
+    con 'let' podemos hacer el SCOPE '{}'
+
+Comprar libro 'Clean Code'
+
+
+SCOPE 
+    Indica el ambito o alcance actual de ejecucion
+
+
+CLOSURE 
+    permite acceder al ambito de una funcion exterior
+    tipo especial de objeto que combina una funcion y el entorno en que se creo la misma
+    el entorno esta formado por las variables locales que estaban dentro del alcance en el momento que se creo CLOSURE.
+
+
+TEMPLATE STRING 
+    se habilita una INTERPOLACIÓN
+    ${}
+
+
+ENTREGABLE 1-9
