@@ -1,159 +1,153 @@
-// let nombre = 'Juan'
+// Funcionabilidades asincrónicas
 
-// {
+// setTimeout(() => {
+   // acciones 
+// }, 2000);
 
-//     let nombre = 'Pedro' // tiene su SCOPE 
-//     console.log(nombre)
-// }                        Muestra el nombre Pedro
+// setInterval(() => {
+//     console.log('Hola mundo');
+// }, 2000);
+
+// No bloquea el hilo de numeros.
+// console.log('1');
+// console.log('2');
+//                                 setTimeout(() => {
+//                                     console.log('3');
+//                                 }, 1000);
+// console.log('4');
 
 
-// const objetoPersona = {
-//     nombre: "Juan"
+
+// Modulo nativo file system: fs
+// SOLO ES POSIBLE EN NODE.JS EN NUESTRO LOCAL
+// Funciones sincronicas a utilizar, bloqueantes
+    // readFileSync  LEER UN ARCHIVO
+    // writeFileSync ESCRIBIR UN ARCHIVO
+    // appendFileSync AGREGAR TEXTO A UN ARCHIVO
+
+const fs = require('fs')
+
+// console.log(fs);
+
+// fs.writeFileSync('./data.txt', 'aca va lo que quiero escribir del texto \n', 'utf-8')  // esto es sincronico
+
+// fs.appendFileSync('./data.txt', 'aca va el contenido agregado y si no existe lo crea \n', 'utf-8')
+
+// try {
+//     // data
+//     const data = fs.readFileSync('data.txt', 'utf8') 
+//     console.log(data);
+// } catch (error) {
+//     console.log(error);
 // }
 
-// const objetoPersona2 = objetoPersona
+// primer parametro es un string con la ruta del archivo que queremos leer
+// segundo parametro indica el tipo de caracteres
 
-// console.log(objetoPersona2.nombre)
+// Borrar archivo
+// fs.unlinkSync('./data.txt')
 
-// objetoPersona.nombre = "Pedro"
-
-// console.log(objetoPersona.nombre);
-
-// let nombre = "Juan"
-
-// let nombre2 = nombre
-
-// nombre = "Pedro"
-
-// console.log(nombre)
+// Manejo de errores con TRY - CATCH
 
 
-// FUNCIONES
+// FS con CALLBACKS - se usan las mismas funciones pero sin la palabra Sync
+// Funcionalidades de fs asincronicas con callbacks
 
-// function saludar(...nombres) {
-//     console.log(nombres);
-    // console.log("Hola" + param1);
-    // console.log("Hola" + param2);
-    // console.log("Hola" + param3);
-// }
-
-// saludar("Juan", "Pedro", "Gino")
-
-// Funcion anonima - 
-
-// const saludar = function(param1) {
-//     console.log("Hola" + param1)
-//     return function(){
-//         console.log("retorno de funcion anonima");
+// fs.writeFile('./data.txt', 'contenido nuevo \n', 'utf-8', (err) => {
+//     if (err) {
+//         console.log(err); // va solo el de error porque estoy creando un archivo
+//     } else {
+//         console.log('archivo creado') 
 //     }
-// }
+// })
 
-
-// FUNCION AUTOEJECUTADA IIFE - sin parametro o con parametro 
-// (function(nombre){
-//     console.log('funcion anonima' + nombre);
-// }) (' gino');
-
-
-// // SCOPE
-// let nombre = "Gino"         // scope global
-//     function saludar() {    // scope secundario
-//         console.log(nombre);
+// fs.appendFile('./data.txt', 'agrego contenido append', 'utf-8' , err => {
+//     if (err) {
+//         console.log(err);
+//     } else {
+//         console.log('contenido agregado');
 //     }
-// saludar();
+// })
 
-
-
-// CLOSURE
-// function crearGritarNombre(nombre){
-//     const signosDeExclamacion = "!!!"  // scope local
-//     return function() {
-//         console.log('bienvenido ' + nombre + ' ' + signosDeExclamacion)
+// fs.readFile('./data.txt', 'utf-8', (err, data) => {
+//     if (err) {
+//         console.log(err); // si da mal entra acá
+//     } else {
+//         console.log(data); // si esta todo bien entra acá
 //     }
-// }
+// })
+// // tercer parametro para error, y donde esta el archivo
 
-// const gritarCh = crearGritarNombre('Gino')
-// // gritarCh es un CLOSURE
-// gritarCh()
-
-
-
-// TEMPLATE STRINGS 
-// function crearGritarNombre(nombre){
-//     const signosDeExclamacion = "!!!"  // scope local
-//     return function() {
-//         // console.log('bienvenido ' + nombre + ' ' + signosDeExclamacion)
-//         console.log(`bienvenido ${nombre} ${signosDeExclamacion}`);
+// fs.unlink('./data.txt', err => {
+//     if (err) {
+//         console.log(err);
+//     } else {
+//         console.log('se borro el archivo');
 //     }
-// }
-
-// const gritarCh = crearGritarNombre('Gino')
-// // gritarCh es un CLOSURE
-// gritarCh()
+// })
 
 
-// CLASES
-// const objetoPersona = {
-//     nombre: "Juan"  // propiedad-atributo
-// }
-
-// class animal {
-//     constructor(sonido) {
-//         this.sonido = sonido
+// Crear carpeta
+// fs.mkdir('./acavadata', err => {
+//     if (err) {
+//         console.log(err);
+//     } else {
+//         console.log('carpeta creada');
 //     }
-//     emitirSonido() {     // método
-//         console.log(this.sonido);
+// })
+
+
+// Ver contenido de una carpeta
+// fs.readdir('./acavadata', (err, contenidoArchivo) => {
+//     if (err) {
+//         console.log(err);
+//     } else {
+//         console.log(contenidoArchivo);
 //     }
-// }
-
-// const gato = new animal('miau')
-// gato.emitirSonido();
-
-// const perro = new animal('guau')
-// perro.emitirSonido();
+// })
 
 
-// class Persona{
-//     constructor(nombre, edad) {
-//         this.nombre = nombre
-//         this.edad = edad
-//     }
-//     saludar(){
-//         console.log(`Hola soy ${this.nombre} y tengo ${this.edad} años`);
-//     }
-// } saludar()
 
-// HERENCIA 
-// class Usuario extends Persona{
-//     constructor(nombre, edad){
-//         super(nombre, edad)
-//     }
-//     saludar2(){
-//         console.log('Hola soy un Usuario');
-//     }
-// }
+// FS: modo asincronico via PROMESAS
 
-// const persona1 = new Usuario ('Juan', 20)
-// const persona2 = new Persona ('Lucas', 22)
+// Leer un archivo  -  Manera vieja
+// fs.promises.readFile('./data.txt', 'utf-8')
+// .then(contenidoArchivo =>{
+//     console.log(contenidoArchivo);
+// })
+// .catch(err => console.log(err)
+// );
 
-// persona1.saludar2()
-// persona2.saludar()
+// Leer un archivo - Manera nueva 
+const leerArchivo = async () => {
+    // try {
+    //     await fs.promises.writeFile('./data.txt', 'Creando contenido', 'utf-8')
+    //     console.log('archivo creado');
+    // } catch (error) {
+    //     console.log(error);
+    // };
 
-class Curso {
-    constructor (titulo, dificultad) {
-        this.titulo = titulo;
-        this._dificultad = dificultad;
-
-        this.lecciones = [];
-    }
-
-    get dificultad() {
-        console.log('GETTER');
-        return this._dificultad
-    }
+    // try {
+    //     await fs.promises.appendFile('./data.txt', 'Agregando contenido con append', 'utf-8')
+    //     console.log('archivo agregado con append');
+    // } catch (error) {
+    //     console.log(error);
+    // }
     
-    set dificultad(nuevaDificultad){
-        console.log('SETTER');
-        this._dificultad = nuevaDificultad
+    try {
+        await fs.promises.rename('./data.txt', './newname.txt')
+        console.log('archivo renombrado');
+    } catch (error) {
+        console.log(error);
     }
 }
+
+//     try {
+//         const contenidoArchivo = await fs.promises.readFile('./data.txt', 'utf-8')
+//         console.log(JSON.parse(contenidoArchivo));
+//     } catch (error) {
+//         console.log(error);
+//     }
+// } 
+
+leerArchivo();
